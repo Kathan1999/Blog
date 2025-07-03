@@ -8,6 +8,7 @@ class Contact(models.Model):
     subject = models.CharField(max_length=1000)
     email = models.CharField(max_length=1000)
     message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.email
