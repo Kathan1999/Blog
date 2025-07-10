@@ -1,14 +1,13 @@
 from django.shortcuts import render, HttpResponse
+from django.shortcuts import get_object_or_404
 from Home.models import Contact
 from django.contrib import messages
-from Home.models import LeftPost
-from Home.models import RightPost
+from Home.models import Post
 # Create your views here.
 
 def index(request):
-    allLeftPosts = LeftPost.objects.all()
-    allRightPosts = RightPost.objects.all()
-    context = {'allLeftPosts':allLeftPosts, 'allRightPosts':allRightPosts}
+    allPosts = Post.objects.all()
+    context = {'allPosts':allPosts}
     if request.method == 'POST':
         name = request.POST.get('name')
         subject = request.POST.get('subject')
@@ -17,7 +16,8 @@ def index(request):
         contact = Contact(name=name, subject=subject, email=email, message=message)
         contact.save()
         messages.success(request, "Your message has been successfully sent")
-    return render(request, 'index.html', context)
+    return render(request, 'blog/index.html', context)
 
-def blogpost(request):
-    return render(request, 'blogpost.html')
+def blogpost(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, 'blog/blogpost.html', {'post':post})
