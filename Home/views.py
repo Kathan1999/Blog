@@ -18,6 +18,3 @@ def index(request):
         contact.save()
         messages.success(request, "Your message has been successfully sent")
     return render(request, 'index.html', context)
-
-def blogpost(request):
-    return render(request, 'blogpost.html')
