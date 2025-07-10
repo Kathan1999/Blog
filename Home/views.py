@@ -21,3 +21,6 @@ def index(request):
 def blogpost(request, slug):
     post = get_object_or_404(Post, slug=slug)
     return render(request, 'blog/blogpost.html', {'post':post})
+
+def search(request):
+    return render(request, 'blog/search.html')
