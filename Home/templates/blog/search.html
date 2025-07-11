@@ -32,7 +32,7 @@
               </li>
             </ul>
             <form class="d-flex" role="search" method="get" action="/search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/ name="search" id="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/ name="query" id="query">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>
@@ -40,17 +40,19 @@
       </nav>
     <!-- Header section code -->
     <br>
+    <h1>Search Results:
     <br>
     <br>
     <!-- search page code -->
+    {% for post in allPosts %}
     <div class="row mb-2 container">
-        <div class="col-md-13">
+        <div class="col-md-12">
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary-emphasis">Article by</strong>
-                    <h3 class="mb-0">title here</h3>
-                    <div class="mb-1 text-body-secondary">Date time here</div>
-                    <p class="card-text mb-auto">content here </p>
+                    <strong class="d-inline-block mb-2 text-primary-emphasis">Article by {{post.author}}</strong>
+                    <h3 class="mb-0">{{post.title}}</h3>
+                    <div class="mb-1 text-body-secondary">{{post.timestamp}}/div>
+                    <p class="card-text mb-auto">{{post.content| truncatechars:200}} </p>
                     <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
                         Continue reading
 
@@ -61,6 +63,7 @@
                 </div>
             </div>
         </div>
+    {% endfor %}
 
     <!-- search page code -->
     <!-- bootstraps javascript code -->

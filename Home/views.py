@@ -23,4 +23,7 @@ def blogpost(request, slug):
     return render(request, 'blog/blogpost.html', {'post':post})
 
 def search(request):
-    return render(request, 'blog/search.html')
+    query = request.GET.get('query','')
+    allPosts = Post.objects.filter(title__icontains=query)
+    params = {'allPosts':allPosts}
+    return render(request, 'blog/search.html', params)
