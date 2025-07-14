@@ -25,5 +25,5 @@ def blogpost(request, slug):
 def search(request):
     query = request.GET.get('query','')
     allPosts = Post.objects.filter(title__icontains=query)
-    params = {'allPosts':allPosts}
+    params = {'allPosts':allPosts, 'query':query}
     return render(request, 'blog/search.html', params)
