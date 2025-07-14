@@ -110,18 +110,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="login" method="post">
+            {% csrf_token %}
             <div class="mb-3">
-              <label for="username" class="form-label">Username:</label>
-              <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+              <label for="loginusername" class="form-label">Username:</label>
+              <input type="text" class="form-control" id="loginusername" name="loginusername" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email:</label>
               <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-              <label for="pass" class="form-label">Password:</label>
-              <input type="password" class="form-control" id="pass" name="pass">
+              <label for="loginpass" class="form-label">Password:</label>
+              <input type="password" class="form-control" id="loginpass" name="loginpass">
             </div>
             <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
