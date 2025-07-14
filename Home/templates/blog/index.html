@@ -31,18 +31,17 @@
               <li class="nav-item">
                 <a class="nav-link" href="/admin">Admin</a>
               </li>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
-                SignUp
-              </button>
-              &nbsp&nbsp&nbsp
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-                Login
-              </button>
             </ul>
             <form class="d-flex" role="search" method="get" action="/search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/ name="search" id="search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#signupModal">
+              SignUp
+            </button>
+            <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+              Login
+            </button>
           </div>
         </div>
       </nav>
@@ -120,8 +119,8 @@
               <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-              <label for="pass1" class="form-label">Password:</label>
-              <input type="password" class="form-control" id="pass1" name="pass1">
+              <label for="pass" class="form-label">Password:</label>
+              <input type="password" class="form-control" id="pass" name="pass">
             </div>
             <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
