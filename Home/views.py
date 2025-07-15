@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from Home.models import Contact
 from django.contrib import messages
 from Home.models import Post
+from Home.models import BlogComment
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
@@ -22,7 +23,8 @@ def index(request):
 
 def blogpost(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    return render(request, 'blog/blogpost.html', {'post':post})
+    comments = BlogComment.objects.filter(post=post)
+    return render(request, 'blog/blogpost.html', {'post':post, 'comments':comments, 'user':request.user})
 
 def search(request):
     query = request.GET.get('query','')
@@ -85,3 +87,14 @@ def handleLogout(request):
         messages.success(request, "Successfully Logged out")
         return redirect("/")
     
+def postComment(request):
+    if request.method == "POST":
+        comment = request.POST.get('comment')
+        user = request.user
+        postSno = request.POST.get('postSno')
+        post = Post.objects.get(sno = postSno)
+        comment = BlogComment(comment=comment, user=user, post=post)
+        comment.save()
+        messages.success(request, "Your comment has been posted successfully")
+
+    return redirect(f"/blog/{post.slug}")
