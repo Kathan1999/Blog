@@ -43,15 +43,15 @@ def handleSignup(request):
         #check for errorneous inputs
         if len(username) > 10:
             messages.error(request, "Username must be under 10 characters")
-            return redirect('home')
+            return redirect('/')
         
         if not username.isalnum():
             messages.error(request, "Username should only contain letters and numbers")
-            return redirect('home')
+            return redirect('/')
 
         if pass1 != pass2:
             messages.error(request, 'password do not match')
-            return redirect('home')
+            return redirect('/')
         
         #Create the User
         myuser = User.objects.create_user(username, email, pass1)
@@ -81,4 +81,7 @@ def handleLogin(request):
 
 
 def handleLogout(request):
-    return HttpResponse("hello")
+        logout(request)
+        messages.success(request, "Successfully Logged out")
+        return redirect("/")
+    
