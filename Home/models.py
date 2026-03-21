@@ -4,7 +4,7 @@ from django.db import models
 class Post(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
-        ('pubmished', 'Published'),
+        ('published', 'Published'),
     )
 
     title = models.CharField(max_length=1000)
