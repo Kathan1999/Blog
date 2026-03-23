@@ -1,6 +1,7 @@
 from django.contrib import admin
 from Home.models import Post
 from Home.models import Product
+from Home.models import Category
 # Register your models here.
 
 class ProductInline(admin.TabularInline):
@@ -19,3 +20,4 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Product)
+admin.site.register(Category)

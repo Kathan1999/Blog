@@ -125,6 +125,14 @@
     }
     </style>
 
+    <div class="container mt-3 text-center">
+        {% for category in categories %}
+        <a href="{% url 'category_posts' slug=category.slug %}" class='btn btn-outline-primary btn-sm m-1'>
+            {{ category.name }} 
+        </a>
+        {% endfor %}
+    </div>
+
     <div class="container mt-5">
 
         <!-- FEATURED POSTS SECTION -->
