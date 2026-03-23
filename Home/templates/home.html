@@ -62,6 +62,41 @@
             margin-top: 40px;
             text-align: center;
         }
+
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+        
+            /* Smooth hover effect */
+            .card {
+                border: none;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+            }
+        
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            }
+        
+            /* Buttons */
+            .btn {
+                border-radius: 8px;
+                font-weight: 500;
+            }
+        
+            /* Section titles */
+            h2 {
+                font-weight: 700;
+            }
+        
+            /* Navbar */
+            .navbar-brand {
+                font-weight: bold;
+                font-size: 1.4rem;
+            }
+        </style>
     </style>
 </head>
 
@@ -75,13 +110,20 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="hero">
+    <section class="hero text-white text-center">
         <div class="container">
-            <h1>Welcome to My Blog</h1>
-            <p>Your daily dose of knowledge, insights & stories.</p>
-            <a href="#latest" class="btn btn-light btn-lg mt-3">Explore Posts</a>
+            <h1 class="display-4 fw-bold">Discover the Best Products & Insights</h1>
+            <p class="lead mt-3">Honest reviews, smart choices, and expert guides.</p>
+            <a href="#latest" class="btn btn-light btn-lg mt-4">Explore Now</a>
         </div>
     </section>
+    
+    <style>
+    .hero {
+        background: linear-gradient(135deg, #0d6efd, #6f42c1);
+        padding: 120px 20px;
+    }
+    </style>
 
     <div class="container mt-5">
 
@@ -130,8 +172,8 @@
                 <div class="card latest-card shadow-sm">
                     <img src="{{ post.featured_image.url }}" class="card-img-top" alt="{{ post.title }}">
                     <div class="card-body">
-                        <h5>{{ post.title|truncatechars:60 }}</h5>
-                        <p class="text-muted">{{ post.excerpt|truncatechars:120 }}</p>
+                        <h5 class="fw-semibold">{{ post.title|truncatechars:60 }}</h5>
+                        <p class="text-muted small">{{ post.excerpt|truncatechars:120 }}</p>
                         <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-primary btn-sm">Read More</a>
                     </div>
                 </div>
