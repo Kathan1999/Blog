@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from .models import Post
 from .models import Category
+from django.db.models import Q
 # Create your views here.
 def home(request):
    posts = Post.objects.filter(status='published').order_by('-created_at')
@@ -20,3 +21,19 @@ def category_posts(request, slug):
     posts = Post.objects.filter(category=category, status='published')
 
     return render(request, 'category.html', {'category':category, 'posts':posts})
+
+def search(request):
+    query = request.GET.get('query')
+
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query),
+            status='published'
+        )
+    else:
+        posts = Post.objects.none()
+
+    return render(request, 'search.html', {
+        'posts': posts,
+        'query': query
+    })

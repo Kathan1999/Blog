@@ -107,6 +107,10 @@
         <div class="container">
             <a class="navbar-brand" href="/">My Blog</a>
         </div>
+        <form class="d-flex" method="GET" action="{% url 'search' %}">
+            <input class="form-control me-2" type="search" name="query" placeholder="Search....">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
     </nav>
 
     <!-- HERO SECTION -->
