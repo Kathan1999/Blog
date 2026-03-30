@@ -179,7 +179,7 @@
         <h2 id="latest" class="mt-5 mb-4">Latest Posts</h2>
 
         <div class="row">
-            {% for post in latest_posts %}
+            {% for post in posts %}
             <div class="col-md-4 mb-4">
                 <div class="card latest-card shadow-sm">
                     <img src="{{ post.featured_image.url }}" class="card-img-top" alt="{{ post.title }}">
@@ -191,6 +191,26 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+
+            {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}" class="btn btn-outline-primary me-2">
+                    Previous
+                </a>
+            {% endif %}
+        
+            <span class="btn btn-primary">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+            </span>
+        
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}" class="btn btn-outline-primary ms-2">
+                    Next
+                </a>
+            {% endif %}
+        
         </div>
 
         <!-- CONTACT SECTION -->

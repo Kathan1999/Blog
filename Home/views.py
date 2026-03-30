@@ -2,15 +2,19 @@ from django.shortcuts import render, HttpResponse
 from .models import Post
 from .models import Category
 from django.db.models import Q
+from django.core.paginator import Paginator
 # Create your views here.
 def home(request):
-   posts = Post.objects.filter(status='published').order_by('-created_at')
-   categories = Category.objects.all()
+   all_posts = Post.objects.filter(status='published').order_by('-created_at')
+   featured_posts = all_posts[:3]
+   remaining_posts = all_posts[3:]
+   paginator = Paginator(remaining_posts, 6)
+   page_number = request.GET.get('page')
+   posts = paginator.get_page(page_number)
 
-   #auto select featured posts 
-   featured_posts = posts[:3] 
-   latest_posts = posts[3:]
-   return render(request, 'home.html', {'posts':posts,'featured_posts':featured_posts,'latest_posts':latest_posts, 'categories':categories,})
+   catogories = Category.objects.all()
+
+   return render(request, 'home.html', {'featured_posts':featured_posts, 'posts':posts, 'categories':catogories,})
 
 def post_detail(request, slug):
     post = Post.objects.get(slug=slug)
