@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <meta name="description" content="{{ post.excerpt|truncatechars:150 }}">
+    <meta name="keywords" content="{{ post.title }}">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar */
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        /* Post Image */
+        .post-header img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Content */
+        .post-content {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #333;
+        }
+
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Buttons */
+        .btn {
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .badge {
+            font-size: 14px;
+            padding: 8px 10px;
+            border-radius: 6px;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">My Blog</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <!-- IMAGE -->
+                <div class="post-header mb-4">
+                    {% if post.featured_image %}
+                    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                    {% endif %}
+                </div>
+
+                <!-- TITLE -->
+                <h1 class="fw-bold">{{ post.title }}</h1>
+
+                <!-- META -->
+                <p class="text-muted">
+                    By <strong>{{ post.author }}</strong> • {{ post.created_at|date:"M d, Y" }}
+                </p>
+
+                <hr>
+
+                <!-- CONTENT -->
+                <div class="post-content mt-4">
+                    {{ post.content|linebreaks }}
+                </div>
+
+                <hr>
+
+                <!-- PRODUCTS SECTION -->
+                {% for product in post.products.all %}
+
+<div class="card mb-4 p-3 shadow-sm position-relative">
+
+    <!-- BEST PRODUCT BADGE -->
+    {% if forloop.first %}
+    <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-2">
+        🏆 Best Choice
+    </span>
+    {% endif %}
+
+    <div class="row align-items-center">
+
+        <!-- IMAGE -->
+        <div class="col-md-4">
+            {% if product.product_image %}
+            <img src="{{ product.product_image.url }}" class="img-fluid rounded">
+            {% endif %}
+        </div>
+
+        <!-- DETAILS -->
+        <div class="col-md-8">
+
+            <h4 class="fw-bold">
+                {{ product.product_name }}
+
+                {% if forloop.first %}
+                <span class="text-success">(Top Pick)</span>
+                {% endif %}
+            </h4>
+
+            <p class="text-success fw-semibold mb-1">{{ product.price }}</p>
+
+            <p class="mb-2">⭐ {{ product.rating }}/5</p>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <small><strong>✔ Pros</strong><br>{{ product.pros }}</small>
+                </div>
+                <div class="col-md-6">
+                    <small><strong>✖ Cons</strong><br>{{ product.cons }}</small>
+                </div>
+            </div>
+
+            <a href="{{ product.affiliate_link }}" target="_blank"
+               class="btn btn-success mt-3">
+                🔥 {{ product.button_text }}
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</body>
+
+</html>
